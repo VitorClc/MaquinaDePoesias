@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1 class="title">Escolha uma poesia</h1>
+    <IndexNavigation></IndexNavigation>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import IndexNavigation from '../components/IndexNavigation.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    IndexNavigation
   }
 }
 </script>
+
+<style scoped>
+  .home{
+    position: relative;
+  }
+
+  .title{
+    float: none;
+    position: absolute;
+    margin-top: 50px;
+    padding-top: 32px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
