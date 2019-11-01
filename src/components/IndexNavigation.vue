@@ -12,11 +12,6 @@ export default {
 </script>
 
 <style scoped>
-    .navigation{
-        margin: 45px;
-        float:right;
-    }
-
     button{
         border: none;
         color: white;
@@ -32,7 +27,7 @@ export default {
     button:focus {outline:0 !important;}
 
     button:active{
-        background-color: #c4a5c5;
+        background-color: #c4a5c4;
         text-decoration: none;
     }
 
