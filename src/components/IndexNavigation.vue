@@ -22,6 +22,9 @@ export default {
         font-size: 16px;
         background-color: #a33689;
         border-radius: 25px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
     }
 
     button:focus {outline:0 !important;}

@@ -1,19 +1,20 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="paper">
     <v-row >
       <v-col cols="4"></v-col>
-      <v-col cols="4" align="center" justify="center">
-        <h1>Escolha uma poesia</h1>
+      <v-col cols="4" align="center" justify="center" class="topSpacing">
+        <h1 class="title">Escolha uma poesia</h1>
       </v-col>
-      <v-col cols="4" align="center" justify="center">
+      <v-col cols="4" align="center" justify="center" class="topSpacing">
         <IndexNavigation></IndexNavigation>
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col align="center" justify="center">
+    <v-row class="centered">
+      <v-col cols="1"></v-col>
+      <v-col cols="10" align="center" justify="center">
         <div class="poemsDiv">
-          <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1>{{data.text}}</h1></router-link>
+          <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">{{data.text}}</h1></router-link>
         </div>
       </v-col>
     </v-row>
@@ -38,9 +39,30 @@ export default {
 }
 </script>
 
-<style scoped>  
+<style scoped>
+  .paper{
+    background-image: url("./../images/paper.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100vh;
+  }
+
+  .topSpacing{
+    margin-top: 30px;
+  }
+
   h1{
-    margin: 0px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+  }
+
+  .title{
+    font-size: 60px;
+  }
+
+  .centered{
+    margin-top: 90px;
   }
 
   .poemsDiv{
@@ -48,4 +70,9 @@ export default {
     border-radius: 25px;
     padding: 25px;
   }
+
+  .poemTitle{
+    font-size: 40px;
+  }
+
 </style>

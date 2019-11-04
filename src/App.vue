@@ -5,4 +5,11 @@
 </template>
 
 <style>
+  ::-webkit-scrollbar {
+  display: none;
+  }
+
+  html{
+    overflow: hidden;
+  }
 </style>
