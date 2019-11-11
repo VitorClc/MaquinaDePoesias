@@ -1,13 +1,32 @@
 <template>
     <div class="navigation">
-        <router-link to="/"><button class="rightSpacing">Anterior</button></router-link>
-        <router-link to="/about"><button>Próxima</button></router-link>
+        <button @click="previousPage" class="rightSpacing" v-if="this.page > 0">Anterior</button>
+        <button @click="nextPage">Próxima</button>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexNav',
+    name: 'IndexNav',
+    methods:{
+        nextPage:function(){
+            if(this.page < 9){
+                this.page+=1
+                this.$emit("nextPage", this.page)
+            }
+        },
+        previousPage:function(){
+            if(this.page > 0){
+                this.page+=1
+                this.$emit("previousPage", this.page)
+            }
+        }
+    },
+    data(){
+        return{
+            page: 0
+        }
+    },
 }
 </script>
 

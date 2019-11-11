@@ -1,23 +1,37 @@
 <template>
   <v-container fluid class="paper">
-    <v-row >
+    <v-row>
       <v-col cols="4"></v-col>
       <v-col cols="4" align="center" justify="center" class="topSpacing">
         <h1 class="title">Escolha uma poesia</h1>
       </v-col>
       <v-col cols="4" align="center" justify="center" class="topSpacing">
-        <IndexNavigation></IndexNavigation>
+        <IndexNavigation :page={page} @nextPage="incrementPage()" @previousPage="decrementPage()"></IndexNavigation>
       </v-col>
     </v-row>
 
-    <v-row class="centered">
-      <v-col cols="1"></v-col>
-      <v-col cols="10" align="center" justify="center">
-        <div class="poemsDiv" id="1">
-          <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">{{data.text}}</h1></router-link>
-        </div>
-      </v-col>
-    </v-row>
+    <transition name="modal" v-if="page == 0">
+      <v-row class="centered">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">{{data.text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row>
+    </transition>
+
+    <transition name="modal" v-if="page == 1">
+      <v-row class="centered">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">aa</h1></router-link>
+          </div>
+        </v-col>
+      </v-row>
+    </transition>
+
   </v-container>
 </template>
 
@@ -28,11 +42,26 @@ import json from '../data/poemsList.json'
 
 export default {
   name: 'home',
-  data(){
-    return{
-      poems: json
+  methods: {
+    incrementPage: function(){
+      if(this.page < 9){
+        this.page+=1
+        console.log(this.page)
+      }
+    },
+    decrementPage: function(){
+      if(this.page > 0){
+        this.page-=1
+        console.log(this.page)
+      }
     }
   },
+    data(){
+      return{
+        poems: json,
+        page: 0
+      }
+    },
   components: {
     IndexNavigation
   }
@@ -75,5 +104,14 @@ export default {
     font-size: 40px;
     font-weight: 300;
   }
+
+  .tray-enter,
+  .tray-leave-to { opacity: 0 }
+
+  .tray-leave,
+  .tray-enter-to { opacity: 1 }
+
+  .tray-enter-active,
+  .tray-leave-active { transition: opacity 300ms }
 
 </style>
