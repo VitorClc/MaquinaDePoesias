@@ -27,7 +27,79 @@
             <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 10].text}}</h1></router-link>
           </div>
         </v-col>
-      </v-row>       
+      </v-row>
+
+      <v-row class="centered" v-if="page==2" key="2">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 20].text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row> 
+
+      <v-row class="centered" v-if="page==3" key="3">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 30].text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row> 
+
+      <v-row class="centered" v-if="page==4" key="4">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 40].text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-row class="centered" v-if="page==5" key="5">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 50].text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row>   
+
+      <v-row class="centered" v-if="page==6" key="6">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 60].text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row>   
+
+      <v-row class="centered" v-if="page==7" key="7">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 70].text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-row class="centered" v-if="page==8" key="8">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 80].text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-row class="centered" v-if="page==9" key="9">
+        <v-col cols="1"></v-col>
+        <v-col cols="10" align="center" justify="center">
+          <div class="poemsDiv" id="1">
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 90].text}}</h1></router-link>
+          </div>
+        </v-col>
+      </v-row>                       
     </transition>
 
   </v-container>
