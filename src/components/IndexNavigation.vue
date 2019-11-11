@@ -1,6 +1,6 @@
 <template>
     <div class="navigation">
-        <button @click="previousPage" class="rightSpacing" v-if="this.page > 0">Anterior</button>
+        <button @click="previousPage" class="rightSpacing" :disabled="!this.page > 0">Anterior</button>
         <button @click="nextPage">Próxima</button>
     </div>
 </template>
@@ -12,13 +12,13 @@ export default {
         nextPage:function(){
             if(this.page < 9){
                 this.page+=1
-                this.$emit("nextPage", this.page)
+                this.$emit("pageValue", this.page)
             }
         },
         previousPage:function(){
             if(this.page > 0){
-                this.page+=1
-                this.$emit("previousPage", this.page)
+                this.page-=1
+                this.$emit("pageValue", this.page)
             }
         }
     },
@@ -50,6 +50,12 @@ export default {
     button:active{
         background-color: #c4a5c4;
         text-decoration: none;
+    }
+
+    button:disabled{
+        padding: 15px 32px;
+        background-color: #cccccc;
+        color: #666666;
     }
 
     .rightSpacing{

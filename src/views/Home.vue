@@ -6,12 +6,12 @@
         <h1 class="title">Escolha uma poesia</h1>
       </v-col>
       <v-col cols="4" align="center" justify="center" class="topSpacing">
-        <IndexNavigation :page={page} @nextPage="incrementPage()" @previousPage="decrementPage()"></IndexNavigation>
+        <IndexNavigation :page={page} @pageValue="changePage"></IndexNavigation>
       </v-col>
     </v-row>
 
-    <transition name="modal" v-if="page == 0">
-      <v-row class="centered">
+    <transition name="fade" mode="out-in">      
+      <v-row class="centered" v-if="page==0" key="0">
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
@@ -19,17 +19,15 @@
           </div>
         </v-col>
       </v-row>
-    </transition>
 
-    <transition name="modal" v-if="page == 1">
-      <v-row class="centered">
+       <v-row class="centered" v-else-if="page==1" key="1">
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">aa</h1></router-link>
+            <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">a</h1></router-link>
           </div>
         </v-col>
-      </v-row>
+      </v-row>     
     </transition>
 
   </v-container>
@@ -43,18 +41,9 @@ import json from '../data/poemsList.json'
 export default {
   name: 'home',
   methods: {
-    incrementPage: function(){
-      if(this.page < 9){
-        this.page+=1
-        console.log(this.page)
-      }
+    changePage: function(e){
+      this.page = e
     },
-    decrementPage: function(){
-      if(this.page > 0){
-        this.page-=1
-        console.log(this.page)
-      }
-    }
   },
     data(){
       return{
@@ -105,13 +94,11 @@ export default {
     font-weight: 300;
   }
 
-  .tray-enter,
-  .tray-leave-to { opacity: 0 }
-
-  .tray-leave,
-  .tray-enter-to { opacity: 1 }
-
-  .tray-enter-active,
-  .tray-leave-active { transition: opacity 300ms }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .25s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
+    opacity: 0;
+  }
 
 </style>
