@@ -19,12 +19,11 @@ export default {
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 30px;
         background-color: #a33689;
-        border-radius: 25px;
+        border-radius: 30px;
         font-family: 'Roboto';
         font-style: normal;
-        font-weight: 300;
     }
 
     button:focus {outline:0 !important;}

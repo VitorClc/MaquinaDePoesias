@@ -13,7 +13,7 @@
     <v-row class="centered">
       <v-col cols="1"></v-col>
       <v-col cols="10" align="center" justify="center">
-        <div class="poemsDiv">
+        <div class="poemsDiv" id="1">
           <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">{{data.text}}</h1></router-link>
         </div>
       </v-col>
@@ -54,7 +54,7 @@ export default {
   h1{
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .title{
@@ -73,6 +73,7 @@ export default {
 
   .poemTitle{
     font-size: 40px;
+    font-weight: 300;
   }
 
 </style>
