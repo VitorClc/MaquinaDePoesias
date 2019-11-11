@@ -1,7 +1,7 @@
 <template>
     <div class="navigation">
         <button @click="previousPage" class="rightSpacing" :disabled="!this.page > 0">Anterior</button>
-        <button @click="nextPage">Próxima</button>
+        <button @click="nextPage" :disabled="this.page > 8">Próxima</button>
     </div>
 </template>
 

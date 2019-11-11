@@ -15,19 +15,19 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">{{data.text}}</h1></router-link>
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>
 
-       <v-row class="centered" v-else-if="page==1" key="1">
+      <v-row class="centered" v-if="page==1" key="1">
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="data in poems" v-bind:key="data.key"><h1 class="poemTitle">a</h1></router-link>
+            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 10].text}}</h1></router-link>
           </div>
         </v-col>
-      </v-row>     
+      </v-row>       
     </transition>
 
   </v-container>
