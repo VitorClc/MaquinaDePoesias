@@ -15,7 +15,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i }}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>
@@ -24,7 +24,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 10].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 10}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 10].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>
@@ -33,7 +33,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 20].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 20}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 20].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row> 
@@ -42,7 +42,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 30].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 30}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 30].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row> 
@@ -51,7 +51,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 40].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 40}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 40].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>
@@ -60,7 +60,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 50].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 50}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 50].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>   
@@ -69,7 +69,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 60].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 60}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 60].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>   
@@ -78,7 +78,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 70].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 70}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 70].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>
@@ -87,7 +87,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 80].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 80}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 80].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>
@@ -96,7 +96,7 @@
         <v-col cols="1"></v-col>
         <v-col cols="10" align="center" justify="center">
           <div class="poemsDiv" id="1">
-            <router-link to="" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 90].text}}</h1></router-link>
+            <router-link :to="{ path:'/poem', query: { index: i + 90}}" v-for="i in 10" v-bind:key="i"><h1 class="poemTitle">{{poems[i - 1 + 90].text}}</h1></router-link>
           </div>
         </v-col>
       </v-row>                       
