@@ -5,8 +5,29 @@
         <v-col cols="1" align="center" justify="center">
           <router-link to="/"><button class="rightSpacing"><v-icon dark>mdi-arrow-left</v-icon></button></router-link>
         </v-col>
-        <v-col cols="10" align="center" justify="center">
-            
+        <v-col cols="9" align="center" justify="center">
+          <transition name="fade" mode="out-in">      
+            <v-row class="centered" v-if="page==1" key="1">
+              <v-col cols="1"></v-col>
+              <v-col cols="10" align="center" justify="center">
+                1
+              </v-col>
+            </v-row>
+
+            <v-row class="centered" v-if="page==2" key="2">
+              <v-col cols="1"></v-col>
+              <v-col cols="10" align="center" justify="center">
+                asdasdd
+              </v-col>
+            </v-row> 
+
+            <v-row class="centered" v-if="page==3" key="3">
+              <v-col cols="1"></v-col>
+              <v-col cols="10" align="center" justify="center">
+                3
+              </v-col>
+            </v-row> 
+          </transition>
         </v-col>
       </v-row>
     </v-container>
@@ -17,7 +38,7 @@
   export default {
     data () {
       return {
-        e1: 0,
+        page: 0,
       }
     },
   }
@@ -36,11 +57,6 @@
         background-image: url("./../images/paper.jpg");
         background-size: cover;
         height: 100vh;
-    }
-
-    .red{
-        background-color: red !important;
-        border-color: red !important;
     }
 
     .rightSpacing{
@@ -68,5 +84,13 @@
         padding: 15px 32px;
         background-color: #cccccc;
         color: #666666;
+    }
+    
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .25s;
+    }
+
+    .fade-enter, .fade-leave-to{
+      opacity: 0;
     }
 </style>

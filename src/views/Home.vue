@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="paper">
     <v-row>
-      <v-col cols="4"  justify="center" class="topSpacing leftSpacing"><router-link to="/form"><button class="bookDraw">Ganhe um livro grátis!</button></router-link></v-col>
+      <v-col cols="4"  justify="center" class="topSpacing leftSpacing"><router-link to="/form"><button class="bookDraw">Livro grátis!</button></router-link></v-col>
       <v-col cols="4" align="center" justify="center" class="topSpacing">
         <h1 class="title">Escolha uma poesia</h1>
       </v-col>
