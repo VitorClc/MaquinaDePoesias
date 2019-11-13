@@ -130,6 +130,10 @@ export default {
 </script>
 
 <style scoped>
+  *{
+    -webkit-user-drag: none;
+  }
+
   .paper{
     background-image: url("./../images/paper.jpg");
     background-repeat: no-repeat;
@@ -162,9 +166,18 @@ export default {
   }
 
   .poemTitle{
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 300;
+    width: 10% !important;
   }
+  
+  a {
+    color:#212121;
+    font-weight: bold; 
+  }
+  a:visited {color:#212121;} /* Visited link    */
+  a:hover {color:#a33689;}   /* Mouse over link */
+  a:active {color:#212121;}
 
   .fade-enter-active, .fade-leave-active {
     transition: opacity .25s;
