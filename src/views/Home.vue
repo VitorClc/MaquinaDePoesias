@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="paper">
     <v-row>
-      <v-col cols="4"></v-col>
+      <v-col cols="4"  justify="center" class="topSpacing leftSpacing"><router-link to="/poem"><button class="bookDraw">Ganhe um livro grátis!</button></router-link></v-col>
       <v-col cols="4" align="center" justify="center" class="topSpacing">
         <h1 class="title">Escolha uma poesia</h1>
       </v-col>
@@ -152,7 +152,7 @@ export default {
   }
 
   .title{
-    font-size: 60px;
+    font-size: 55px;
   }
 
   .centered{
@@ -175,15 +175,58 @@ export default {
     color:#212121;
     font-weight: bold; 
   }
-  a:visited {color:#212121;} /* Visited link    */
-  a:hover {color:#a33689;}   /* Mouse over link */
+  a:visited {color:#212121;}
+  a:hover {color:#a33689;}
   a:active {color:#212121;}
 
   .fade-enter-active, .fade-leave-active {
     transition: opacity .25s;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
+  .fade-enter, .fade-leave-to{
     opacity: 0;
   }
 
+  button{
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    background-color: #a33689;
+    border-radius: 30px;
+    font-family: 'Roboto';
+    font-style: normal;
+  }
+
+  button:focus {outline:0 !important;}
+
+  button:active {
+    background-color: #c4a5c4;
+    text-decoration: none;
+  }
+
+  button:disabled{
+    padding: 15px 32px;
+    background-color: #cccccc;
+    color: #666666;
+  }
+
+  @-webkit-keyframes color_change /* Safari and Chrome */ {
+    0% {background:#a33689;}
+    100%{background: #d648b5;}
+  }
+
+  .bookDraw {
+    -webkit-animation: color_change 1s infinite alternate;
+    -moz-animation: color_change 1s infinite alternate;
+    -ms-animation: color_change 1s infinite alternate;
+    -o-animation: color_change 1s infinite alternate;
+    animation: color_change 1s infinite alternate;
+  }
+
+  .leftSpacing{
+    padding-left: 50px;
+  }
 </style>
