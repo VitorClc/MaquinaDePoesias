@@ -147,6 +147,7 @@ export default {
 
   h1{
     font-family: 'Roboto';
+    src: url("./../fonts/Roboto-Regular.ttf") format("ttf");
     font-style: normal;
     font-weight: 400;
   }
