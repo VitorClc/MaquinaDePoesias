@@ -3,12 +3,20 @@
     <v-container fluid class="paper">
       <v-row>
         <v-col cols="1" align="center" justify="center">
-          <button @click="previousPage" class="rightSpacing"><v-icon>mdi-arrow-right</v-icon></button>
+          <router-link to="/"><button class="rightSpacing"><v-icon dark>mdi-arrow-left</v-icon></button></router-link>
         </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
+
+<script>
+export default {
+  methods:{
+
+  }
+}
+</script>
 
 <style scoped>
   .poem{
