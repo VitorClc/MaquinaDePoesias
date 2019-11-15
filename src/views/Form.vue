@@ -16,7 +16,7 @@
                   <v-row>
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
-                      <v-text-field v-model="name" :error-messages="nameErrors" @input="$v.name.$touch()" @blur="$v.name.$touch()" class="styledInput" label="Nome" required></v-text-field>
+                      <input ref="nameInput" @keypress="test()" @blur="test()"/>
                       <v-text-field v-model="email" :error-messages="emailErrors" @input="$v.email.$touch()" @blur="$v.email.$touch()" class="styledInput" label="E-mail"></v-text-field>
                       <v-text-field v-model="tel" :error-messages="telErrors" @input="$v.tel.$touch()" @blur="$v.tel.$touch()" class="styledInput" label="Telefone"></v-text-field>
                       <button class="formPrevious" @click="prevPage()" :disabled="page < 2">Voltar</button>
@@ -76,6 +76,10 @@
     },
 
     methods:{
+      test(){
+        this.name = this.$refs.nameInput.value
+        console.log(this.name)
+      },
       ans1Check(evt){
         if (this.ans1.length >= 190) {
           evt.preventDefault()
