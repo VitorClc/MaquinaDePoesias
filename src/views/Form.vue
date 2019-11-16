@@ -9,6 +9,26 @@
         <v-col cols="1" align="center" justify="center"></v-col>
         <v-col cols="10" align="center" justify="center">
           <transition name="fade" mode="out-in">      
+            <v-row class="centered" v-if="page==0" key="1">
+              <v-col cols="1"></v-col>
+              <v-col cols="10" align="center" justify="center">
+                <div class="poemsDiv">
+                  <v-row>
+                    <v-col cols="2"></v-col>
+                    <v-col cols="8">
+                      <label class="inputInfo">CPF</label>
+                      <input ref="cpfInput" @keypress="handleCPF()" @blur="handleCPF()" placeholder="Digite seu CPF"/>
+                      <div class="error" v-if="!$v.cpf.required">Você precisa digitar seu CPF</div>
+                      <div class="error" v-if="$v.cpf.required && !$v.cpf.validCPF">CPF Inválido</div>
+
+                      <button class="formPrevious" @click="prevPage()" :disabled="page < 1">Voltar</button>
+                      <button class="formNext" @click="infoPage()" :disabled="!$v.cpf.validCPF">Próximo</button>
+                    </v-col>
+                  </v-row>  
+                </div>
+              </v-col>
+            </v-row>
+
             <v-row class="centered" v-if="page==1" key="1">
               <v-col cols="1"></v-col>
               <v-col cols="10" align="center" justify="center">
@@ -16,9 +36,22 @@
                   <v-row>
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
-                      <input ref="nameInput" @keypress="test()" @blur="test()"/>
-                      <v-text-field v-model="email" :error-messages="emailErrors" @input="$v.email.$touch()" @blur="$v.email.$touch()" class="styledInput" label="E-mail"></v-text-field>
-                      <v-text-field v-model="tel" :error-messages="telErrors" @input="$v.tel.$touch()" @blur="$v.tel.$touch()" class="styledInput" label="Telefone"></v-text-field>
+                      <label class="inputInfo">Nome</label>
+                      <input ref="nameInput" @keypress="handleName()" @blur="handleName()" placeholder="Digite seu nome"/>
+                      <div class="error" v-if="!$v.name.required">Você precisa digitar seu nome</div>
+                      
+                      <br><br><br>
+                      <label class="inputInfo">E-mail</label>
+                      <input ref="emailInput" @keypress="handleEmail()" @blur="handleEmail()" placeholder="Digite seu e-mail"/>
+                      <div class="error" v-if="!$v.email.required && $v.email.email">Você precisa digitar seu e-mail</div>
+                      <div class="error" v-if="!$v.email.email">E-mail inválido</div>
+
+                      <br><br><br>
+                      <label class="inputInfo">Telefone - Formato: (XX) XXXX-XXXX</label>
+                      <input ref="phoneInput" @keypress="handlePhone()" @blur="handlePhone()" placeholder="Digite seu número telefone"/>
+                      <div class="error" v-if="!$v.phone.required">Você precisa digitar seu número de telefone</div>
+                      <div class="error" v-if="$v.phone.required && !$v.phone.mustBeCool">Número de telefone Inválido</div>                      
+                      
                       <button class="formPrevious" @click="prevPage()" :disabled="page < 2">Voltar</button>
                       <button class="formNext" @click="nextPage()" :disabled="this.$v.$invalid">Próximo</button>
                     </v-col>
@@ -63,8 +96,33 @@
 <script>
   import { validationMixin } from 'vuelidate'
   import { required, email } from 'vuelidate/lib/validators'
+  import { format as formatCPF } from 'gerador-validador-cpf'
+  import { validate as validateCPF } from 'gerador-validador-cpf'
 
-  const mustBeCool = (value) => /^(\(11\) [9][0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$/.test(value) == true
+  function testCPF(value){
+        var convertedCPF = value.replace('.', '')
+        convertedCPF = convertedCPF.replace('-', '')
+        convertedCPF = convertedCPF.replace('.', '')
+        var cpf = convertedCPF
+
+        console.log(cpf)
+
+        if(cpf.length < 11)
+        {
+          return false
+        }
+        else{
+          cpf = formatCPF(cpf)
+          if(validateCPF(cpf) == false){
+            return false
+          }else{
+            return true
+          }
+        }
+    }
+
+  const mustBeCool = (value) => /^\([1-9]\d\)(\s|\d)9?\d{4}-\d{4}$/.test(value) == true
+  const validCPF = (value) => testCPF(value) == true
 
   export default {
     mixins: [validationMixin],
@@ -72,13 +130,26 @@
     validations: {
       name: { required },
       email: { required, email },
-      tel: {required, mustBeCool}
+      phone: {required, mustBeCool},
+      cpf: {required, validCPF}
     },
 
     methods:{
-      test(){
+      handleCPF(){
+        this.cpf = this.$refs.cpfInput.value
+        //console.log(this.name)
+      },
+      handleName(){
         this.name = this.$refs.nameInput.value
-        console.log(this.name)
+        //console.log(this.name)
+      },
+      handleEmail(){
+        this.email = this.$refs.emailInput.value
+        //console.log(this.email)
+      },
+      handlePhone(){
+        this.phone = this.$refs.phoneInput.value
+        //console.log(this.email)
       },
       ans1Check(evt){
         if (this.ans1.length >= 190) {
@@ -89,6 +160,11 @@
       prevPage () {
         if(this.page > 1){
           this.page -= 1
+        }
+      },
+      infoPage:function(){
+        if(this.$v.cpf.validCPF){
+          alert("ok")
         }
       },
       nextPage:function(){
@@ -104,7 +180,7 @@
         const data = {
           name: this.name,
           email: this.email,
-          tel: this.tel,
+          phone: this.phone,
           ans1: this.ans1,
           ans2: this.ans2,
           ans3: this.ans3,
@@ -141,10 +217,11 @@
     },
     data () {
       return {
-        page: 1,
+        page: 0,
+        cpf: '',
         name: '',
         email: '',
-        tel: '',
+        phone: '',
         ans1: '',
         ans2: '',
         ans3: '',
@@ -223,4 +300,26 @@
     .fade-enter, .fade-leave-to{
       opacity: 0;
     }
+
+  input{
+    font-size: 25px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid#c4a5c4;
+    border-radius: 4px;
+  }
+
+  .inputInfo{
+    float: left;
+    font-size: 25px;
+  }
+
+  .error{
+    color: #FF0000;
+    font-size: 18px;
+    position: fixed;
+  }
+
 </style>
