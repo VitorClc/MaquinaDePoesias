@@ -9,7 +9,7 @@
         <v-col cols="1" align="center" justify="center"></v-col>
         <v-col cols="10" align="center" justify="center">
           <transition name="fade" mode="out-in">      
-            <v-row class="centered" v-if="page==0" key="1">
+            <v-row class="centered" v-if="page==0" key="0">
               <v-col cols="1"></v-col>
               <v-col cols="10" align="center" justify="center">
                 <div class="poemsDiv">
@@ -52,7 +52,7 @@
                       <div class="error" v-if="!$v.phone.required">Você precisa digitar seu número de telefone</div>
                       <div class="error" v-if="$v.phone.required && !$v.phone.mustBeCool">Número de telefone Inválido</div>                      
                       
-                      <button class="formPrevious" @click="prevPage()" :disabled="page < 2">Voltar</button>
+                      <button class="formPrevious" @click="prevPage()" :disabled="page < 1">Voltar</button>
                       <button class="formNext" @click="nextPage()" :disabled="this.$v.$invalid">Próximo</button>
                     </v-col>
                   </v-row>
@@ -88,6 +88,20 @@
             </v-row> 
           </transition>
         </v-col>
+        <v-app>
+          <v-row justify="center">
+              <v-dialog v-model="dialog" persistent max-width="400">
+                <v-card>
+                  <v-card-title class="headline">Erro</v-card-title>
+                  <v-card-text>CPF já cadastrado</v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="dialog = false">Fechar</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+        </v-app>
       </v-row>
     </v-container>
   </div>
@@ -105,7 +119,7 @@
         convertedCPF = convertedCPF.replace('.', '')
         var cpf = convertedCPF
 
-        if(cpf.length < 11)
+if(cpf.length < 11)
         {
           return false
         }
@@ -156,14 +170,25 @@
         }
       },
       prevPage () {
-        if(this.page > 1){
+        if(this.page > 0){
           this.page -= 1
         }
       },
       infoPage:function(){
         if(this.$v.cpf.validCPF){
-          console.log(this.cpf)
-          this.$socket.emit('cpfValidation', this.cpf)
+          var convertedCPF = this.cpf.replace('.', '')
+          convertedCPF = convertedCPF.replace('-', '')
+          convertedCPF = convertedCPF.replace('.', '')
+          var cpf = convertedCPF
+          
+          this.$socket.emit('cpfValidation', cpf)
+          this.sockets.subscribe("cpfResponse", (data) => {
+            if(data == false){
+              this.dialog = true
+            }else{
+              this.page += 1
+            }
+          })
         }
       },
       nextPage:function(){
@@ -177,6 +202,7 @@
       },
       finishForm:function() {
         const data = {
+          cpf: this.cpf,
           name: this.name,
           email: this.email,
           phone: this.phone,
@@ -189,7 +215,7 @@
 
         const jsonString = JSON.stringify(data)
 
-        alert(jsonString)
+        this.$socket.emit('saveData', jsonString)
       },
       ping(){
       }      
@@ -228,6 +254,7 @@
         ans3: '',
         ans4: '',
         ans5: '',
+        dialog: false,
       }
     },
   }
