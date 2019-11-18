@@ -105,8 +105,6 @@
         convertedCPF = convertedCPF.replace('.', '')
         var cpf = convertedCPF
 
-        console.log(cpf)
-
         if(cpf.length < 11)
         {
           return false
@@ -164,7 +162,8 @@
       },
       infoPage:function(){
         if(this.$v.cpf.validCPF){
-          alert("ok")
+          console.log(this.cpf)
+          this.$socket.emit('cpfValidation', this.cpf)
         }
       },
       nextPage:function(){
@@ -191,7 +190,9 @@
         const jsonString = JSON.stringify(data)
 
         alert(jsonString)
-      }
+      },
+      ping(){
+      }      
     },
     computed:{
       nameErrors () {
