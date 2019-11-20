@@ -90,17 +90,27 @@
         </v-col>
         <v-app>
           <v-row justify="center">
-              <v-dialog v-model="dialog" persistent max-width="400">
-                <v-card>
-                  <v-card-title class="headline">Erro</v-card-title>
-                  <v-card-text>CPF já cadastrado</v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn text @click="dialog = false">Fechar</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-row>
+            <v-dialog v-model="dialog" persistent max-width="400">
+              <v-card>
+                <v-card-title class="headline">Erro</v-card-title>
+                <v-card-text>CPF já cadastrado</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn text @click="dialog = false">Fechar</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
+            <v-dialog v-model="dialog2" persistent max-width="400">
+              <v-card>
+                <v-card-text>Cadastro finalizado</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <router-link to="/"><v-btn text @click="closeEndDialog()"></v-btn></router-link>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
         </v-app>
       </v-row>
     </v-container>
@@ -119,19 +129,19 @@
         convertedCPF = convertedCPF.replace('.', '')
         var cpf = convertedCPF
 
-if(cpf.length < 11)
-        {
-          return false
+    if(cpf.length < 11)
+            {
+              return false
+            }
+            else{
+              cpf = formatCPF(cpf)
+              if(validateCPF(cpf) == false){
+                return false
+              }else{
+                return true
+              }
+            }
         }
-        else{
-          cpf = formatCPF(cpf)
-          if(validateCPF(cpf) == false){
-            return false
-          }else{
-            return true
-          }
-        }
-    }
 
   const mustBeCool = (value) => /^\([1-9]\d\)(\s|\d)9?\d{4}-\d{4}$/.test(value) == true
   const validCPF = (value) => testCPF(value) == true
@@ -201,24 +211,26 @@ if(cpf.length < 11)
         }
       },
       finishForm:function() {
-        const data = {
-          cpf: this.cpf,
-          name: this.name,
-          email: this.email,
-          phone: this.phone,
-          ans1: this.ans1,
-          ans2: this.ans2,
-          ans3: this.ans3,
-          ans4: this.ans4,
-          ans5: this.ans5,
-        }
+        var data = [
+          this.cpf,
+          this.name,
+          this.email,
+          this.phone,
+          this.ans1,
+          this.ans2,
+          this.ans3,
+          this.ans4,
+          this.ans5,
+        ]
 
-        const jsonString = JSON.stringify(data)
-
-        this.$socket.emit('saveData', jsonString)
+        this.$socket.emit('saveData', data)
+        this.sockets.subscribe("finished", () => {
+          this.dialog2 = true
+        })
       },
-      ping(){
-      }      
+      closeEndDialog:function(){
+        this.dialog2 = false
+      }
     },
     computed:{
       nameErrors () {
@@ -255,6 +267,7 @@ if(cpf.length < 11)
         ans4: '',
         ans5: '',
         dialog: false,
+        dialog2: false,
       }
     },
   }
