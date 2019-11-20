@@ -90,21 +90,22 @@
           <v-row justify="center">
             <v-dialog v-model="dialog" persistent max-width="400">
               <v-card>
-                <v-card-title class="headline">Erro</v-card-title>
-                <v-card-text>CPF já cadastrado</v-card-text>
+                <v-card-title class="headline grey lighten-2">Erro</v-card-title>
+                <v-card-text style="margin-top: 20px">CPF já cadastrado</v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn text @click="dialog = false">Fechar</v-btn>
+                  <button @click="dialog = false" class="modalButton">Fechar</button>
                 </v-card-actions>
               </v-card>
             </v-dialog>
 
             <v-dialog v-model="dialog2" persistent max-width="400">
               <v-card>
+                <v-card-title class="headline grey lighten-2">Confirmação</v-card-title>
                 <v-card-text>Cadastro finalizado</v-card-text>
-                <v-card-actions>
+                <v-card-actions style="margin-top: 20px">
                   <v-spacer></v-spacer>
-                  <router-link to="/"><v-btn text @click="closeEndDialog()"></v-btn></router-link>
+                  <router-link to="/"><button text @click="closeEndDialog()"></button></router-link>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -192,9 +193,11 @@
           this.$socket.emit('cpfValidation', cpf)
           this.sockets.subscribe("cpfResponse", (data) => {
             if(data == false){
+              console.log("asdasd")
+              this.dialog = false
               this.dialog = true
-              this.page = 0
             }else{
+              console.log("Con")
               this.page = 0
               this.page += 1
             }
@@ -371,5 +374,10 @@
   input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
     margin: 0; 
+  }
+
+  .modalButton{
+    font-size: 15px;
+    padding: 10px 30px;
   }
 </style>
