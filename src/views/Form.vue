@@ -17,7 +17,7 @@
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                       <label class="inputInfo">CPF</label>
-                      <input type="number" ref="cpfInput" @keypress="handleCPF()" @blur="handleCPF()" placeholder="Digite seu CPF"/>
+                      <input ref="cpfInput" @keypress="handleCPF()" @blur="handleCPF()" placeholder="Digite seu CPF"/>
                       <div class="error" v-if="!$v.cpf.required">Você precisa digitar seu CPF</div>
                       <div class="error" v-if="$v.cpf.required && !$v.cpf.validCPF">CPF Inválido</div>
 
@@ -50,7 +50,7 @@
 
                       <br><br><br>
                       <label class="inputInfo">Telefone - Formato: (XX) XXXX-XXXX</label>
-                      <input type="number" ref="phoneInput" @keypress="handlePhone()" @blur="handlePhone()" placeholder="Digite seu número telefone"/>
+                      <input ref="phoneInput" @keypress="handlePhone()" @blur="handlePhone()" placeholder="Digite seu número telefone"/>
                       <div class="error" v-if="!$v.phone.required">Você precisa digitar seu número de telefone</div>
                       <div class="error" v-if="$v.phone.required && !$v.phone.mustBeCool">Número de telefone Inválido</div>                      
                       
@@ -141,7 +141,7 @@
             }
         }
 
-  const mustBeCool = (value) => /^\([1-9]\d\)(\s|\d)9?\d{4}-\d{4}$/.test(value) == true
+  const mustBeCool = (value) => /^\([1-9]\d\)(\s|)(9?\d{4}-\d{4}|(\d{4}-\d{4}))$/.test(value) == true
   const validCPF = (value) => testCPF(value) == true
 
   export default {
