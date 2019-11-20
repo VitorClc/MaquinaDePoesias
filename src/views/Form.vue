@@ -3,13 +3,13 @@
     <v-container fluid class="paper">
       <v-row>
         <v-col cols="1" align="center" justify="center">
-          <router-link to="/"><button class="rightSpacing"><v-icon dark>mdi-arrow-left</v-icon></button></router-link>
+          <router-link to="/" @click="this.page = 0"><button class="rightSpacing"><v-icon dark>mdi-arrow-left</v-icon></button></router-link>
         </v-col>
         <v-col cols="11" align="center" justify="center"></v-col>
         <v-col cols="1" align="center" justify="center"></v-col>
         <v-col cols="10" align="center" justify="center">
           <transition name="fade" mode="out-in">      
-            <v-row class="centered" v-if="page==0" key="0">
+            <v-row class="centered" v-if="page==0" key="1">
               <v-col cols="1"></v-col>
               <v-col cols="10" align="center" justify="center">
                 <div class="poemsDiv">
@@ -17,19 +17,21 @@
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
                       <label class="inputInfo">CPF</label>
-                      <input ref="cpfInput" @keypress="handleCPF()" @blur="handleCPF()" placeholder="Digite seu CPF"/>
+                      <input type="number" ref="cpfInput" @keypress="handleCPF()" @blur="handleCPF()" placeholder="Digite seu CPF"/>
                       <div class="error" v-if="!$v.cpf.required">Você precisa digitar seu CPF</div>
                       <div class="error" v-if="$v.cpf.required && !$v.cpf.validCPF">CPF Inválido</div>
 
-                      <button class="formPrevious" @click="prevPage()" :disabled="page < 1">Voltar</button>
-                      <button class="formNext" @click="infoPage()" :disabled="!$v.cpf.validCPF">Próximo</button>
+                      <div class="buttons">
+                        <button class="formPrevious" @click="prevPage()" :disabled="page < 1">Voltar</button>
+                        <button class="formNext" @click="infoPage()" :disabled="!$v.cpf.validCPF">Próximo</button>
+                      </div>
                     </v-col>
                   </v-row>  
                 </div>
               </v-col>
             </v-row>
 
-            <v-row class="centered" v-if="page==1" key="1">
+            <v-row class="centered" v-if="page==1" key="2">
               <v-col cols="1"></v-col>
               <v-col cols="10" align="center" justify="center">
                 <div class="poemsDiv">
@@ -42,25 +44,27 @@
                       
                       <br><br><br>
                       <label class="inputInfo">E-mail</label>
-                      <input ref="emailInput" @keypress="handleEmail()" @blur="handleEmail()" placeholder="Digite seu e-mail"/>
+                      <input type="email" ref="emailInput" @keypress="handleEmail()" @blur="handleEmail()" placeholder="Digite seu e-mail"/>
                       <div class="error" v-if="!$v.email.required && $v.email.email">Você precisa digitar seu e-mail</div>
                       <div class="error" v-if="!$v.email.email">E-mail inválido</div>
 
                       <br><br><br>
                       <label class="inputInfo">Telefone - Formato: (XX) XXXX-XXXX</label>
-                      <input ref="phoneInput" @keypress="handlePhone()" @blur="handlePhone()" placeholder="Digite seu número telefone"/>
+                      <input type="number" ref="phoneInput" @keypress="handlePhone()" @blur="handlePhone()" placeholder="Digite seu número telefone"/>
                       <div class="error" v-if="!$v.phone.required">Você precisa digitar seu número de telefone</div>
                       <div class="error" v-if="$v.phone.required && !$v.phone.mustBeCool">Número de telefone Inválido</div>                      
                       
-                      <button class="formPrevious" @click="prevPage()" :disabled="page < 1">Voltar</button>
-                      <button class="formNext" @click="nextPage()" :disabled="this.$v.$invalid">Próximo</button>
+                      <div class="buttons">
+                        <button class="formPrevious" @click="prevPage()" :disabled="page < 1">Voltar</button>
+                        <button class="formNext" @click="nextPage()" :disabled="this.$v.$invalid">Próximo</button>
+                      </div>
                     </v-col>
                   </v-row>
                 </div>
               </v-col>
             </v-row>
 
-            <v-row class="centered" v-if="page==2" key="2">
+            <v-row class="centered" v-if="page==2" key="3">
               <v-col cols="1"></v-col>
               <v-col cols="10" align="center" justify="center">
                 <div class="poemsDiv">
@@ -72,18 +76,12 @@
                         <v-text-field v-model="ans3" class="styledInput" label="Quantas poesias você ouviu?"></v-text-field>
                         <v-text-field v-model="ans4" class="styledInput" label="O que achou da janela de LIBRAS?"></v-text-field>
                         <v-text-field v-model="ans5" class="styledInput" label="Você gostaria que este totem ocupasse algum outro espaço?"></v-text-field>
+
                         <button class="formPrevious" @click="prevPage()" :disabled="page < 2" >Voltar</button>
                         <button class="formNext" @click="finishForm()">Próximo</button>
                     </v-col>
                   </v-row>
                 </div>
-              </v-col>
-            </v-row> 
-
-            <v-row class="centered" v-if="page==3" key="3">
-              <v-col cols="1"></v-col>
-              <v-col cols="10" align="center" justify="center">
-                3
               </v-col>
             </v-row> 
           </transition>
@@ -195,7 +193,9 @@
           this.sockets.subscribe("cpfResponse", (data) => {
             if(data == false){
               this.dialog = true
+              this.page = 0
             }else{
+              this.page = 0
               this.page += 1
             }
           })
@@ -294,6 +294,10 @@
         height: 100vh;
     }
 
+    .buttons{
+      margin-top: 45px
+    }
+
     button{
       border: none;
       color: white;
@@ -362,5 +366,10 @@
     font-size: 18px;
     position: fixed;
   }
-
+  
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
 </style>
