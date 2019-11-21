@@ -193,11 +193,9 @@
           this.$socket.emit('cpfValidation', cpf)
           this.sockets.subscribe("cpfResponse", (data) => {
             if(data == false){
-              console.log("asdasd")
               this.dialog = false
               this.dialog = true
             }else{
-              console.log("Con")
               this.page = 0
               this.page += 1
             }
